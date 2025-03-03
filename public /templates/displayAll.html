@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Data</title>
+    <link rel="stylesheet" href="./static/css/site.css">
+
+</head>
+<body>
+    <p><a href="{{ url_for('search') }}">Search</a></p>
+    <p><a href="{{ url_for('newData') }}">New</a></p>
+    <p><a href="{{ url_for('newGoals') }}">intialize</a></p>
+
+    <div class="container">
+        <h1>Body Data Over Days</h1>
+
+        {% if body_data %}
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Weight (kg)</th>
+                    <th>BMI</th>
+                </tr>
+                {% for day in body_data %}
+                <tr>
+                    <td>{{ day.date }}</td>
+                    <td>{{ day.weight }}</td>
+                    <td>{{ day.bmi }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No data available.</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>

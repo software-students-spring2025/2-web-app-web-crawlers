@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+</head>
+<body>
+    <div id="outer">
+        <h1>Search</h1>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        
+        <form action="{{ url_for('newGoals') }}" method="POST">
+            <label for="Weight">weight:</label>
+            <input type="text" name="weight" required>
+            <!--more data here-->
+            <button type="submit">enter</button>
+        </form>
+
+        <p><a href="{{ url_for('displayAll') }}">Back</a></p>
+    </div>
+</body>
+</html>
