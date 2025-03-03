@@ -9,3 +9,5 @@ import pymongo.mongo_client
 
 # make connection to the database
 connection = pymongo.MongoClient("mongodb+srv://lgl1876523678:1017@cluster0.k8xwe.mongodb.net/?retryWrites=true&w=majority")
+db = connection['project2_db']
+
