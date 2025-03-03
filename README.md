@@ -4,11 +4,11 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-See instructions. Delete this line and place the Product Vision Statement here.
+Our fitness web page empowers individuals of all levels to achieve their health and wellness goals by providing personalized plans, fitness tracking and progress monitoring.
 
 ## User stories
 
-See instructions. Delete this line and place a link to the user stories here.
+[Issues Page](https://github.com/software-students-spring2025/2-web-app-web-crawlers/issues/1)
 
 ## Steps necessary to run the software
 
