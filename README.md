@@ -34,17 +34,6 @@ inside directory `public`, run the following command:
 you should see:
 - Running on http://127.0.0.1:5000/
 then go to your local address
-=======
-### Clone the Repository
-- Use git clone to retrieve the project code from GitHub.
-- Navigate into the newly created project directory.
-
-### Set Up the Environment
-- Ensure you are not on a VPN or any network environment that may cause DNS resolution errors.
-- Install required dependencies
-
-### Configure Project Settings
-- Create a .env file and provide necessary database credentials in Public folder.
 
 
 ## Task boards
