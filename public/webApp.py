@@ -37,7 +37,7 @@ def login():
 
     return render_template("login.html")
 
-@app.route("/logout")
+@app.route("/logout") 
 def logout():
     """Handle user logout"""
     session.pop("user_id", None)
