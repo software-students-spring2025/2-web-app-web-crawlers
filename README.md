@@ -13,15 +13,23 @@ Our fitness web page empowers individuals of all levels to achieve their health 
 ## Steps necessary to run the software
 
 ### Clone the Repository
-Work in progress...
+- Use git clone to retrieve the project code from GitHub.
+- Navigate into the newly created project directory.
+
 ### Set Up the Environment
-Work in progress...
+- Ensure you are not on a VPN or any network environment that may cause DNS resolution errors.
+- Install required dependencies
+
 ### Configure Project Settings
-Work in progress...
+- Create a .env file and provide necessary database credentials in Public folder.
+
 ### Start the Application
 Work in progress...
+
 ### Access and Test
-Work in progress...
+- Open a browser (or API client) to the specified URL/port to verify the application is running.
+- Check logs or console output for any errors or status messages.
+
 ### Additional Notes
 Work in progress...
 
