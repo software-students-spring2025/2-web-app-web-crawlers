@@ -15,6 +15,12 @@
         {% endif %}
         
         <form action="{{ url_for('handleNewData') }}" method="POST">
+            <label for="day">day:</label>
+            <input type="text" name="day" required>
+            <label for="month">month:</label>
+            <input type="text" name="month" required>
+            <label for="year">year:</label>
+            <input type="text" name="year" required>
             <label for="Weight">weight:</label>
             <input type="text" name="weight" required>
             <button type="submit">enter</button>
