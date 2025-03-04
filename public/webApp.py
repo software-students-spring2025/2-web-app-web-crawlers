@@ -1,46 +1,32 @@
-# Web App - team Web Crawlers
-
-# import modules that are necessary for this program
 import pymongo
 import datetime
 from bson.objectid import ObjectId
-from flask import Flask, render_template, request, redirect, abort, url_for, make_response
-import pymongo.mongo_client
+from flask import Flask, render_template, request, redirect, url_for, session
+from dotenv import load_dotenv
+import os
 
-# instantiate a flask-based web app
 app = Flask(__name__)
+app.secret_key = "your_secret_key"
 
-
-# make connection to the database
-connection = pymongo.MongoClient("mongodb+srv://lgl1876523678:1017@cluster0.k8xwe.mongodb.net/?retryWrites=true&w=majority")
+load_dotenv()
+mongo_uri = os.getenv("MONGO_URI")
+connection = pymongo.MongoClient(mongo_uri)
 db = connection['project2_db']
 
-current_user = ''
-
-
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
-    global current_user  
-
-    if request.method == 'POST':  
+    if request.method == 'POST':
         username = request.form.get('username', '')
         password = request.form.get('password', '')
-
         user_collection = db['userInfo']
         result = user_collection.find_one({'name': username})
-
         if not result or 'password' not in result:
             return render_template('login.html', error="User not found")
-
         if result['password'] == password:
-            current_user = user_collection.find_one({'name':username}) 
-            return render_template('displayAll.html')
-
+            session['user_id'] = str(result['_id'])
+            return redirect(url_for('displayAll'))
         return render_template('login.html', error="Invalid credentials")
-
-    return render_template('login.html') 
-
-
+    return render_template('login.html')
 
 @app.route('/register')
 def register():
@@ -48,115 +34,122 @@ def register():
 
 @app.route('/handleRegister', methods=['POST'])
 def handleRegister():
-    global current_user
-    # store new user info in the database
     username = request.form['username']
     password = request.form['password']
     age = request.form['age']
     height = request.form['height']
     sex = request.form['sex']
     tweight = request.form['target']
-    information = {
-        'name':username,
-        'password':password,
-        'age':age,
-        'height':height,
-        'sex':sex,
-        'target':tweight,
-    }
-    mongoid = db['userInfo'].insert_one(information)
-    current_user = db['userInfo'].find_one({'name': username})
 
-    # redirect to displayAll page
+    information = {
+        'name': username,
+        'password': password,
+        'age': age,
+        'height': height,
+        'sex': sex,
+        'target': tweight
+    }
+    db['userInfo'].insert_one(information)
+    
+    user = db['userInfo'].find_one({'name': username})
+    session['user_id'] = str(user['_id'])
+    
     return redirect(url_for('displayAll'))
+
 
 @app.route('/search')
 def search():
     return render_template('search.html')
 
-@app.route('/handleSearch')
+@app.route('/handleSearch', methods=['POST'])
 def handleSearch():
-    # process the search conditions
     day = request.form['day']
     month = request.form['month']
     year = request.form['year']
-    docs = db.weightList.find_one({
-        'day':day,
-        'month':month,
-        'year':year,
+    docs = db['weightList'].find_one({
+        'day': int(day),
+        'month': int(month),
+        'year': int(year)
     })
-        
-    # redirect to displayAll page with conditions
-    return redirect(url_for('search'), info=docs)
+    return render_template('search.html', info=docs)
 
 @app.route('/newData')
 def newData():
-
     return render_template('newData.html')
 
 @app.route('/handleNewData', methods=['POST'])
 def handleNewData():
-    # process the new data
-    time = datetime.utcnow()
-    day = time.day
-    month = time.month
-    year = time.month
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    user = db['userInfo'].find_one({'_id': ObjectId(session['user_id'])})
+    now = datetime.datetime.utcnow()
+    day, month, year = now.day, now.month, now.year
     weight = request.form['weight']
     information = {
-        'name':current_user,
-        'day':day,
-        'month':month,
-        'year':year,
-        'weight':weight
+        'name': user['name'],
+        'day': day,
+        'month': month,
+        'year': year,
+        'weight': weight
     }
-    mongoid = db.weightList.insert_one(information)
-    
-    # redirect to displayAll page with new data
+    db['weightList'].insert_one(information)
     return redirect(url_for('displayAll'))
 
 @app.route('/newGoal')
 def newGoal():
-    
     return render_template('newGoals.html')
 
 @app.route('/handleNewGoal', methods=['POST'])
 def handleNewGoal():
-    # process the new goal
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
     target_weight = request.form['weight']
-    db.userInfo.update_one(
-    {'name': current_user}, 
-    {'$set': {'target': target_weight}}
-)
-
-    # redirect to displayAll page with new goal
+    db['userInfo'].update_one(
+        {'_id': ObjectId(session['user_id'])},
+        {'$set': {'target': target_weight}}
+    )
     return redirect(url_for('displayAll'))
 
 @app.route('/displayAll')
 def displayAll():
-    global current_user
-    if not current_user:
-        return redirect(url_for('login'))  
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
 
-    body_data = []
-    current_user_name = current_user['name']
-    bmrdb = list(db['bmrList'].find({'name': current_user_name}))
-    weightdb = {
-        (entry['day'], entry['month'], entry['year']): entry
-        for entry in db['weightList'].find({'name': current_user_name})
+    user = db['userInfo'].find_one({'_id': ObjectId(session['user_id'])})
+
+    # BMR
+    bmr_list = list(db['bmrList'].find({'name': user['name']}))
+    bmr_dict = {
+        (doc['day'], doc['month'], doc['year']): doc
+        for doc in bmr_list
     }
 
-    for day in bmrdb:
-        date_key = (day['day'], day['month'], day['year'])
+    # Weight
+    weight_list = list(db['weightList'].find({'name': user['name']}))
+    weight_dict = {
+        (doc['day'], doc['month'], doc['year']): doc
+        for doc in weight_list
+    }
 
+    # Get *all* date tuples from both sets
+    all_dates = set(bmr_dict.keys()) | set(weight_dict.keys())
+
+    body_data = []
+
+    # Sort by (year, month, day) if you want chronological order
+    for date_key in sorted(all_dates, key=lambda x: (x[2], x[1], x[0])):
+        bmr_record = bmr_dict.get(date_key, {})
+        weight_record = weight_dict.get(date_key, {})
+
+        day_val, month_val, year_val = date_key
         current_day = {
-            'day': day['day'],
-            'month': day['month'],
-            'year': day['year'],
-            'weight': day['weight'],
-            'bmr': weightdb.get(date_key, {}).get('bmr', 'N/A'),
-            'calorie': weightdb.get(date_key, {}).get('calorie', 'N/A')
+            'day': day_val,
+            'month': month_val,
+            'year': year_val,
+            'weight': weight_record.get('weight', 'N/A'),
+            'bmr': bmr_record.get('bmr', 'N/A'),
+            'calorie': bmr_record.get('calorie', 'N/A')
         }
-
         body_data.append(current_day)
 
     return render_template('displayAll.html', body_data=body_data)
