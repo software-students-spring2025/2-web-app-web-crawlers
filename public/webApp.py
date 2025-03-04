@@ -123,14 +123,11 @@ def newGoal():
 def handleNewGoal():
     # process the new goal
     target_weight = request.form['weight']
-    db.userInfo.update_one({
-        {'name': current_user},
-        {
-            '$set':{
-                'target':target_weight
-            }
-        }
-    })
+    db.userInfo.update_one(
+    {'name': current_user}, 
+    {'$set': {'target': target_weight}}
+)
+
     # redirect to displayAll page with new goal
     return redirect(url_for('displayAll'))
 
@@ -162,7 +159,7 @@ def displayAll():
 
         body_data.append(current_day)
 
-    return redirect(url_for('displayAll'), body_data=body_data)
+    return render_template('displayAll.html', body_data=body_data)
 
 if __name__ == "__main__":
     app.run(debug=True)
