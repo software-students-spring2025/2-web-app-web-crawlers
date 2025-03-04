@@ -1,12 +1,18 @@
 import pymongo  
+import os
 import time
 import datetime
 import platform
+from dotenv import load_dotenv
 
 def connectDB():
+    load_dotenv()
+    db_user = os.getenv("DB_USER")
+    db_password = os.getenv("DB_PASSWORD")
+    db_url = os.getenv("DB_URL") 
     # User name:lgl1876523678
     # Password: 1017
-    client = pymongo.MongoClient("mongodb+srv://lgl1876523678:1017@cluster0.k8xwe.mongodb.net/?retryWrites=true&w=majority")
+    client = pymongo.MongoClient(f"mongodb+srv://{db_user}:{db_password}@{db_url}/?retryWrites=true&w=majority")
     return client
 
 def insert(collection, doc):
