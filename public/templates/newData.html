@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+    <title>Add New Data</title>
 </head>
+
 <body>
-    <div id="outer">
-        <h1>Search</h1>
+    <h1>Add Weight Data</h1>
+    <form action="{{ url_for('new_data') }}" method="POST">
+        <label>Date (DDMMYYYY):</label>
+        <input type="text" name="date" required>
 
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-        
-        <form action="{{ url_for('new_goals') }}" method="POST">
-            <label for="Weight">weight:</label>
-            <input type="text" name="weight" required>
-            <!--more data here-->
-            <button type="submit">enter</button>
-        </form>
+        <label>Weight (kg):</label>
+        <input type="text" name="weight" required>
 
-        <p><a href="{{ url_for('display_all') }}">Back</a></p>
-    </div>
+        <button type="submit">Add</button>
+    </form>
+    <p><a href="{{ url_for('display_all') }}">Back</a></p>
 </body>
+
 </html>

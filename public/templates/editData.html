@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Edit Weight Data</title>
+</head>
+
+<body>
+    <h1>Edit Weight Entry for {{ entry.date }}</h1>
+    <form action="{{ url_for('edit_data', date=entry.date) }}" method="POST">
+        <label>New Weight (kg):</label>
+        <input type="text" name="weight" value="{{ entry.weight }}" required>
+
+        <button type="submit">Update</button>
+    </form>
+    <p><a href="{{ url_for('display_all') }}">Back</a></p>
+</body>
+
+</html>

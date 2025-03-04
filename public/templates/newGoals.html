@@ -15,9 +15,15 @@
         {% endif %}
         
         <form action="{{ url_for('new_goals') }}" method="POST">
-            <label for="Weight">weight:</label>
-            <input type="text" name="weight" required>
-            <!--more data here-->
+            <label for="date">Date:</label>
+            <input type="text" name="date" required> 
+            
+            <label for="calorie">Calories (Kcal):</label>
+            <input type="text" name="calorie" required> 
+            
+            <label for="bmr">BMR (Kcal):</label>
+            <input type="text" name="bmr" required>
+
             <button type="submit">enter</button>
         </form>
 

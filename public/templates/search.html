@@ -1,45 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+    <title>Search Data</title>
 </head>
+
 <body>
-    <div id="outer">
-        <h1>Search</h1>
+    <h1>Search Data</h1>
+    <form action="{{ url_for('search') }}" method="POST">
+        <label>Date (DDMMYYYY):</label>
+        <input type="text" name="date" required>
+        <button type="submit">Search</button>
+    </form>
 
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-        
-        <form action="{{ url_for('search') }}" method="POST">
-            <label for="Year">Year:</label>
-            <input type="text" name="year" required>
-            <label for="Month">Month:</label>
-            <input type="text" name="month" required>            
-            <label for="Day">Day:</label>
-            <input type="text" name="day" required>
-            <button type="submit">Search</button>
-        </form>
-
-        <p><a href="{{ url_for('display_all') }}">Back</a></p>
-    </div>
-
-    {% if result %}
-    <div id="result">
-        <h2>Data for {{ result.date }}</h2>
-        <form action="{{ url_for('update_data') }}" method="POST">
-            <input type="hidden" name="date" value="{{ result.date }}">
-            
-            <label for="info">Information:</label>
-            <input type="text" name="info" value="{{ result.info }}" required>
-
-            <button type="submit">Update</button>
-        </form>
-    </div>
+    {% if result.weight or result.bmr %}
+    <h2>Results</h2>
+    <p>Weight: {{ result.weight.weight }} kg</p>
+    <p>BMR: {{ result.bmr.bmr }} kcal</p>
+    {% else %}
+    <p>No data found.</p>
     {% endif %}
 
+    <p><a href="{{ url_for('display_all') }}">Back</a></p>
 </body>
+
 </html>
