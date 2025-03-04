@@ -14,7 +14,7 @@
             <p class="error">{{ error }}</p>
         {% endif %}
         
-        <form action="{{ url_for('newGoals') }}" method="POST">
+        <form action="{{ url_for('handleNewGoals') }}" method="POST">
             <label for="Weight">weight:</label>
             <input type="text" name="weight" required>
             <!--more data here-->

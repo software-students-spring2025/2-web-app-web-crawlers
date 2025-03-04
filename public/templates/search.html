@@ -14,7 +14,7 @@
             <p class="error">{{ error }}</p>
         {% endif %}
         
-        <form action="{{ url_for('search') }}" method="GET">
+        <form action="{{ url_for('handleSearch') }}" method="GET">
             <label for="Year">Year:</label>
             <input type="text" name="year" required>
             <label for="Month">Month:</label>
@@ -30,7 +30,7 @@
     {% if result %}
     <div id="result">
         <h2>Data for {{ result.date }}</h2>
-        <form action="{{ url_for('update_data') }}" method="GET">
+        <form action="{{ url_for('handleSearch') }}" method="GET">
             <input type="hidden" name="date" value="{{ result.date }}">
             
             <label for="info">Information:</label>

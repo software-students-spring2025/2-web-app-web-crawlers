@@ -30,7 +30,7 @@ def handleRegister():
     # store new user info in the database
 
     # redirect to displayAll page
-    return redirect(url_for('displayALL'))
+    return redirect(url_for('displayAll'))
 
 @app.route('/search')
 def search():
@@ -75,4 +75,6 @@ def displayAll():
     # if there is condition, filter the results
 
     # redirect to displayAll page
-    return redirect(url_for('displayAll.html'))
+    return render_template('displayAll.html')
+
+app.run()
