@@ -14,14 +14,14 @@
             <p class="error">{{ error }}</p>
         {% endif %}
         
-        <form action="{{ url_for('newGoals') }}" method="POST">
+        <form action="{{ url_for('new_goals') }}" method="POST">
             <label for="Weight">weight:</label>
             <input type="text" name="weight" required>
             <!--more data here-->
             <button type="submit">enter</button>
         </form>
 
-        <p><a href="{{ url_for('displayAll') }}">Back</a></p>
+        <p><a href="{{ url_for('display_all') }}">Back</a></p>
     </div>
 </body>
 </html>
