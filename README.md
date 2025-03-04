@@ -12,8 +12,15 @@ Our fitness web page empowers individuals of all levels to achieve their health 
 
 ## Steps necessary to run the software
 
-See instructions. Delete this line and place instructions to download, configure, and run the software here.
+Work in progress...
 
 ## Task boards
+- [Sprint 1](https://github.com/orgs/software-students-spring2025/projects/87)
+- [Sprint 2](https://github.com/orgs/software-students-spring2025/projects/135)
 
-See instructions. Delete this line and place a link to the task boards here.
+
+## Credit
+- [Michael Liu](https://github.com/Michaelliu1017)
+- [Eric Xu](https://github.com/EricXu1244)
+- [Benny Shen](https://github.com/js-montgomery)
+- [Harry Pan](https://github.com/pzhiheng)
