@@ -18,15 +18,21 @@
         {% if body_data %}
             <table>
                 <tr>
-                    <th>Date</th>
-                    <th>Weight (kg)</th>
-                    <th>BMI</th>
+                    <th>Day</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                    <th>Weight(kg)</th>
+                    <th>bmr(kcal)</th>
+                    <th>calorie(kcal)</th>
                 </tr>
                 {% for day in body_data %}
                 <tr>
-                    <td>{{ day.date }}</td>
+                    <td>{{ day.day }}</td>
+                    <td>{{ day.month }}</td>
+                    <td>{{ day.year }}</td>
                     <td>{{ day.weight }}</td>
-                    <td>{{ day.bmi }}</td>
+                    <td>{{ day.bmr }}</td>
+                    <td>{{ day.calorie }}</td>
                 </tr>
                 {% endfor %}
             </table>
@@ -34,6 +40,5 @@
             <p>No data available.</p>
         {% endif %}
     </div>
-
 </body>
 </html>

@@ -27,17 +27,26 @@
         <p><a href="{{ url_for('displayAll') }}">Back</a></p>
     </div>
 
-    {% if result %}
-    <div id="result">
-        <h2>Data for {{ result.date }}</h2>
-        <form action="{{ url_for('handleSearch') }}" method="GET">
-            <input type="hidden" name="date" value="{{ result.date }}">
-            
-            <label for="info">Information:</label>
-            <input type="text" name="info" value="{{ result.info }}" required>
-
-            <button type="submit">Update</button>
-        </form>
+    {% if info %}
+    <div class="container">
+        <h1></h1>
+            <table>
+                <tr>
+                    <th>Day</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                    <th>Weight(kg)</th>
+                </tr>
+                <tr>
+                    <td>{{ info.day }}</td>
+                    <td>{{ info.month }}</td>
+                    <td>{{ info.year }}</td>
+                    <td>{{ info.weight }}</td>
+                </tr>
+            </table>
+        {% else %}
+            <p>No data available.</p>
+        {% endif %}
     </div>
     {% endif %}
 
