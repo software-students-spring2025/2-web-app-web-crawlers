@@ -14,7 +14,7 @@
             <p class="error">{{ error }}</p>
         {% endif %}
 
-        <form action="{{ url_for('displayAll') }}" method="POST">
+        <form action="{{ url_for('displayAll') }}" method="">
             <label for="username">Username:</label>
             <input type="text" name="username" required>
 

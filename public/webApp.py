@@ -34,7 +34,7 @@ def login():
 
         if result['password'] == password:
             current_user = user_collection.find_one({'name':username}) 
-            return redirect(url_for('displayAll'))
+            return render_template('displayAll.html')
 
         return render_template('login.html', error="Invalid credentials")
 
@@ -55,7 +55,7 @@ def handleRegister():
     age = request.form['age']
     height = request.form['height']
     sex = request.form['sex']
-    tweight = request.form['weight']
+    tweight = request.form['target']
     information = {
         'name':username,
         'password':password,
@@ -162,7 +162,7 @@ def displayAll():
 
         body_data.append(current_day)
 
-    return render_template('displayAll.html', body_data=body_data)
+    return redirect(url_for('displayAll'), body_data=body_data)
 
 if __name__ == "__main__":
     app.run(debug=True)
