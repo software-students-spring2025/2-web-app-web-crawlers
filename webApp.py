@@ -80,7 +80,7 @@ def handleSearch():
     day = request.form['day']
     month = request.form['month']
     year = request.form['year']
-    docs = db.weightList.find({
+    docs = db.weightList.find_one({
         'day':day,
         'month':month,
         'year':year,
