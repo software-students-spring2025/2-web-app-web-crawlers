@@ -25,7 +25,7 @@ def register():
 
     return render_template('newUser.html')
 
-@app.route('/handleRegister', method=['POST'])
+@app.route('/handleRegister', methods=['POST'])
 def handleRegister():
     # store new user info in the database
 
@@ -49,7 +49,7 @@ def newData():
 
     return render_template('newData.html')
 
-@app.route('/handleNewData', method=['POST'])
+@app.route('/handleNewData', methods=['POST'])
 def handleNewData():
     # process the new data
 
@@ -61,7 +61,7 @@ def newGoal():
     
     return render_template('newGoal.html')
 
-@app.route('/handleNewGoal', method=['POST'])
+@app.route('/handleNewGoal', methods=['POST'])
 def handleNewGoal():
     # process the new goal
 
