@@ -13,11 +13,7 @@ Our fitness web page empowers individuals of all levels to achieve their health 
 ## Steps necessary to run the software
 
 Work in progress...
-  1. 
-  2. 
-  3. 
-  4. 
-  5.
+
 
 ## Task boards
 - [Sprint 1  Task Planner](https://github.com/orgs/software-students-spring2025/projects/87)
