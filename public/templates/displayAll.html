@@ -33,6 +33,12 @@
                     <td>{{ day.weight }}</td>
                     <td>{{ day.bmr }}</td>
                     <td>{{ day.calorie }}</td>
+                    <td>
+                        <a href="{{ url_for('editData', entry_id=day._id) }}">Edit</a>
+                        <form action="{{ url_for('deleteData', entry_id=day._id) }}" method="POST" style="display:inline;">
+                            <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </table>
