@@ -8,11 +8,32 @@ Our fitness web page empowers individuals of all levels to achieve their health 
 
 ## User stories
 
-[Issues Page](https://github.com/software-students-spring2025/2-web-app-web-crawlers/issues/1)
+[User Stories Issue Page](https://github.com/software-students-spring2025/2-web-app-web-crawlers/issues/1)
 
 ## Steps necessary to run the software
 
-Work in progress...
+### Prerequisites
+Before running the project, install/do the following:
+- Python
+- pipenv
+- pymongo
+- Git
+- create a virtual environment
+
+### Clone repository
+open your terminal and run:
+- git clone https://github.com/software-students-spring2025/2-web-app-web-crawlers/tree/main
+
+### Configuration
+Admins will provide the .env file, place it inside folder:
+- 2-web-app-web-crawlers/public
+
+### Run the app
+inside directory `public`, run the following command:
+- python webApp.py
+you should see:
+- Running on http://127.0.0.1:5000/
+then go to your local address
 
 
 ## Task boards
