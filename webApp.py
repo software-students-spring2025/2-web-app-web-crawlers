@@ -83,7 +83,7 @@ def handleSearch():
     docs = db.weightList.find({
         'day':day,
         'month':month,
-        'year':year
+        'year':year,
     })
         
     # redirect to displayAll page with conditions
