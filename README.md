@@ -15,8 +15,8 @@ Our fitness web page empowers individuals of all levels to achieve their health 
 Work in progress...
 
 ## Task boards
-- [Sprint 1](https://github.com/orgs/software-students-spring2025/projects/87)
-- [Sprint 2](https://github.com/orgs/software-students-spring2025/projects/135)
+- [Sprint 1  Task Planner](https://github.com/orgs/software-students-spring2025/projects/87)
+- [Sprint 2  Task Planner](https://github.com/orgs/software-students-spring2025/projects/135)
 
 
 ## Credit
